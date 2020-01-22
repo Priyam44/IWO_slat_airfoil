@@ -1,0 +1,89 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         10000;
+
+deltaT          1;
+
+writeControl    runTime;
+
+writeInterval   1000;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    #includeFunc residuals
+    forces
+    {
+        type                forces;
+        libs                ("libforces.so");
+        writeControl        timeStep;
+        writeInterval       10;
+        patches             (wing);
+        rho                 rhoInf;
+        log                 true;
+        rhoInf              1.225;
+        CofR                (0.04974612746 -0.001671895744 0.0125);
+    }
+    forceCoeffs
+    {
+        type                forceCoeffs;
+        functionObjectLibs  ( "libforces.so" );
+        outputControl       timeStep;
+        outputInterval      1;
+    
+        patches             ( "wing.*" );
+        pName               p;
+        UName               U;
+        rho                 rhoInf;
+        log                 true;
+        
+        liftDir             (0 1 0);
+        dragDir             (1 0 0);
+        CofR                (0.04974612746 -0.001671895744 0.0125);
+        pitchAxis           (0 0 1);
+        
+        magUInf             35;
+        rhoInf              1.225;
+        lRef                0.25;
+        Aref                0.0125;
+    }
+}
+
+
+// ************************************************************************* //
