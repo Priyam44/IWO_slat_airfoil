@@ -1,4 +1,4 @@
-"""two curves varying up and down"""
+"""two bezier curves"""
 import random,os,math,copy,STLgen,aircordinates,subprocess
 import numpy as np
 import bezierbuilder as bb
