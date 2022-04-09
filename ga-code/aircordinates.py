@@ -1,6 +1,7 @@
 import numpy as np
 import STLgen
 
+#Coordinates of Primary Airfoil
 aircord = np.array([[100,	0	],
 [99,	0.2969	],
 [98,	0.53335	],
@@ -122,6 +123,8 @@ aircord = np.array([[100,	0	],
 [98,	-0.13339	],
 [99,	-0.09666	],
 [100,0]]	)
+
+#Coordinates of Baseline profile for a Slat
 cord=np.array([[6.996108596,-5.549789742,0.],
 [7.251920749,-4.959425886,0.],
 [7.731919605,-4.106932791,0.],
@@ -219,6 +222,9 @@ initial_cpoints = np.array([[  6.9961086  , -5.54978974],
 [ 14.53714153 , 11.92558065],
 [ 14.03779692 , 14.61821902],
 [-13.94023124 , -1.9938111 ]])
+
+#######################################################################
+
 #aircord = np.append(aircord.transpose(), np.zeros((1, aircord.shape[0])), 0).transpose()
 #aircord_rot=STLgen.rotate(aircord,13,[0,0,1])
 
